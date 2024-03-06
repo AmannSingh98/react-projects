@@ -6,18 +6,17 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path='/' exact={true}>
-          <Dashboard/>
+        <Route path="/" exact={true}>
+          <Dashboard />
         </Route>
-        <Route path='/login'>
-          <Login/>
+        <Route path="/login">
+          <Login />
         </Route>
-        <Route path='*'>
-          <Error/>
+        <Route path="*">
+          <Error />
         </Route>
       </Switch>
     </Router>
-    
   );
 }
 
