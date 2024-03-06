@@ -1,19 +1,48 @@
-import React from 'react';
-import { GithubContext } from '../context/context';
+import React, { useContext } from 'react';
+import { GithubContext, LeetcodeContext } from '../context/context';
 import styled from 'styled-components';
 import { MdBusiness, MdLocationOn, MdLink } from 'react-icons/md';
 const Card = () => {
-  return <h2>card component</h2>;
+  const { leetcodeUserBio } = useContext(LeetcodeContext);
+  const { name, avatar, username, skillTags, country, company, about } =
+    leetcodeUserBio;
+
+  return (
+    <Wrapper>
+      <header>
+        <img src={avatar} alt={name} />
+        <div>
+          <h4>{name}</h4>
+          <p>@{username}</p>
+        </div>
+      </header>
+      <p className="bio">
+        {' '}
+        {(about.length > 50 && `${about.slice(0, 80)}...`) ||
+          `Let's code and make this world a beautiful place for coders (Bio....)`}
+      </p>
+      <div className="links">
+        <p>
+          <MdBusiness></MdBusiness> {company || 'Company (Not Mentioned)'}
+        </p>
+        <p>
+          <MdLocationOn></MdLocationOn> {country || 'Location (Not Mentioned)'}
+        </p>
+      </div>
+    </Wrapper>
+  );
 };
 const Wrapper = styled.article`
   background: var(--clr-white);
-  padding: 1.5rem 2rem;
+  /* max-width: 500px;
+  width: 100%; */
+  padding: 2rem 2rem;
   border-top-right-radius: var(--radius);
   border-bottom-left-radius: var(--radius);
   border-bottom-right-radius: var(--radius);
   position: relative;
   &::before {
-    content: 'user';
+    content: 'Coder';
     position: absolute;
     top: 0;
     left: 0;
@@ -29,9 +58,9 @@ const Wrapper = styled.article`
   }
   header {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr;
     align-items: center;
-    column-gap: 1rem;
+    column-gap: 2rem;
     margin-bottom: 1rem;
     img {
       width: 75px;

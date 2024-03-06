@@ -3,11 +3,20 @@ import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 import loginImg from '../images/login-img.svg';
 const Login = () => {
-  return <h2>login page</h2>;
+  return (
+    <Wrapper>
+      <div className="container">
+        <img src={loginImg} alt="leetcode user" />
+        <h1>LeetCode User</h1>
+        <button className="btn">login</button>
+      </div>
+    </Wrapper>
+  );
 };
 const Wrapper = styled.section`
   min-height: 100vh;
   display: grid;
+  background: linear-gradient(to right, white, #6cc3f9);
   place-items: center;
   .container {
     width: 90vw;

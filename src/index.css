@@ -68,7 +68,7 @@ Global Styles
 }
 body {
   font-family: var(--ff-secondary);
-  background: var(--clr-grey-10);
+  background: linear-gradient(to right, white, #ceebfd);
   color: var(--clr-grey-1);
   line-height: 1.5;
   font-size: 0.875rem;
@@ -134,7 +134,6 @@ p {
   }
 }
 /*  global classes */
-
 .btn {
   text-transform: uppercase;
   background: var(--clr-primary-5);
@@ -164,7 +163,7 @@ p {
 .section-center {
   width: 90vw;
   margin: 0 auto;
-  max-width: 1170px;
+  max-width: 1600px;
 }
 @media screen and (min-width: 992px) {
   .section-center {

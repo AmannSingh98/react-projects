@@ -1,9 +1,15 @@
-import React from 'react';
-import { GithubContext } from '../context/context';
+import React, { useContext } from 'react';
+import { GithubContext, LeetcodeContext } from '../context/context';
 import styled from 'styled-components';
 
-const Followers = () => {
-  return <h2>followers component</h2>;
+const Question = () => {
+  const { leetcodeDailyQuestion } = useContext(LeetcodeContext);
+  console.log(leetcodeDailyQuestion);
+  return (
+    <Wrapper>
+      <div className="followers">Hi ammmm</div>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.article`
@@ -14,7 +20,7 @@ const Wrapper = styled.article`
   position: relative;
 
   &::before {
-    content: ' followers';
+    content: ' Daily Problem';
     position: absolute;
     top: 0;
     left: 0;
@@ -36,6 +42,9 @@ const Wrapper = styled.article`
     gap: 1.25rem 1rem;
     padding: 1rem 2rem;
   }
+  /* .question {
+    height: 400px;
+  } */
   article {
     transition: var(--transition);
     padding: 0.15rem 0.5rem;
@@ -58,4 +67,4 @@ const Wrapper = styled.article`
     }
   }
 `;
-export default Followers;
+export default Question;
