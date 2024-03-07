@@ -4,10 +4,16 @@ import styled from 'styled-components';
 
 const Question = () => {
   const { leetcodeDailyQuestion } = useContext(LeetcodeContext);
-  console.log(leetcodeDailyQuestion);
+  const { difficulty, question, questionId, questionTitle } =
+    leetcodeDailyQuestion;
   return (
     <Wrapper>
-      <div className="followers">Hi ammmm</div>
+      <div className="question">
+        <article>
+          <h3>{questionId}.</h3>
+          <h2>{questionTitle}</h2>
+        </article>
+      </div>
     </Wrapper>
   );
 };
@@ -34,7 +40,7 @@ const Wrapper = styled.article`
     letter-spacing: var(--spacing);
     font-size: 1rem;
   }
-  .followers {
+  .question {
     overflow: scroll;
     height: 260px;
     display: grid;
