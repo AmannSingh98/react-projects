@@ -4,15 +4,18 @@ import styled from 'styled-components';
 
 const Question = () => {
   const { leetcodeDailyQuestion } = useContext(LeetcodeContext);
-  const { difficulty, question, questionId, questionTitle } =
+  const { difficulty, questionLink, questionId, questionTitle } =
     leetcodeDailyQuestion;
   return (
     <Wrapper>
       <div className="question">
-        <article>
-          <h3>{questionId}.</h3>
-          <h2>{questionTitle}</h2>
-        </article>
+        <header>
+          <h3>
+            {questionId}. {questionTitle}
+          </h3>
+        </header>
+        <p>easy</p>
+        <a href={questionLink}>Solve Problem</a>
       </div>
     </Wrapper>
   );
@@ -41,35 +44,45 @@ const Wrapper = styled.article`
     font-size: 1rem;
   }
   .question {
-    overflow: scroll;
+    /* overflow: scroll; */
     height: 260px;
-    display: grid;
-    grid-template-rows: repeat(auto-fill, minmax(45px, 1fr));
-    gap: 1.25rem 1rem;
-    padding: 1rem 2rem;
-  }
-  /* .question {
-    height: 400px;
-  } */
-  article {
-    transition: var(--transition);
-    padding: 0.15rem 0.5rem;
-    border-radius: var(--radius);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    column-gap: 1rem;
-    img {
-      height: 100%;
-      width: 45px;
-      border-radius: 50%;
-      object-fit: cover;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    header {
+      display: flex;
+      /* img {
+        height: 100%;
+        width: 45px;
+        border-radius: 50%;
+        object-fit: cover;
+      } */
+      h3 {
+        font-size: 24px;
+        line-height: 30px;
+        font-weight: 600;
+        font-family: var(--ff-primary);
+      }
     }
-    h4 {
-      margin-bottom: 0;
+
+    p {
+      color: var(--clr-primary-5);
+      border: 1px solid var(--clr-primary-5);
+      border-radius: 1rem;
+      padding: 0.1rem 0.1rem;
+      width: 100%;
+      max-width: 50px;
     }
     a {
-      color: var(--clr-grey-5);
+      color: var(--clr-primary-5);
+      border: 1px solid var(--clr-primary-5);
+      border-radius: 1rem;
+      padding: 0.25rem 0.75rem;
+      width: 100%;
+      max-width: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 `;
