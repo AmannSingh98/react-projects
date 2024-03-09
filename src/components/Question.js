@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Question = () => {
   const { leetcodeDailyQuestion } = useContext(LeetcodeContext);
-  const { difficulty, questionLink, questionId, questionTitle } =
+  const { topicTags, difficulty, questionLink, questionId, questionTitle } =
     leetcodeDailyQuestion;
   return (
     <Wrapper>
@@ -14,8 +14,17 @@ const Question = () => {
             {questionId}. {questionTitle}
           </h3>
         </header>
-        <p>easy</p>
-        <a href={questionLink}>Solve Problem</a>
+        <p>
+          <span>easy</span>
+
+          {topicTags.map((tag) => {
+            return <span>{tag.name}</span>;
+          })}
+        </p>
+
+        <a href={questionLink} target="_blank">
+          Solve Problem
+        </a>
       </div>
     </Wrapper>
   );
@@ -45,10 +54,11 @@ const Wrapper = styled.article`
   }
   .question {
     /* overflow: scroll; */
-    height: 260px;
+    height: 255px;
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    padding: 1rem 2rem;
+
     header {
       display: flex;
       /* img {
@@ -57,32 +67,42 @@ const Wrapper = styled.article`
         border-radius: 50%;
         object-fit: cover;
       } */
-      h3 {
-        font-size: 24px;
-        line-height: 30px;
-        font-weight: 600;
-        font-family: var(--ff-primary);
-      }
     }
-
+    h3 {
+      font-size: 20px;
+      line-height: 30px;
+      font-weight: 600;
+      font-family: var(--ff-primary);
+      margin-bottom: 0.75rem;
+    }
     p {
-      color: var(--clr-primary-5);
-      border: 1px solid var(--clr-primary-5);
-      border-radius: 1rem;
-      padding: 0.1rem 0.1rem;
-      width: 100%;
-      max-width: 50px;
+      margin: 0;
+      margin-bottom: 4rem;
     }
-    a {
+    span {
       color: var(--clr-primary-5);
       border: 1px solid var(--clr-primary-5);
       border-radius: 1rem;
       padding: 0.25rem 0.75rem;
-      width: 100%;
-      max-width: 150px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      width: fit-content;
+      font-size: 12px;
+      margin-bottom: 0.5rem;
+      margin-right: 0.5rem;
+    }
+    a {
+      color: #00cc00;
+      background: #e6ffe6;
+      border-radius: 1rem;
+      padding: 0.5rem 1.25rem;
+      width: fit-content;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 auto;
+      transform: translatey(50%);
+      &:hover {
+        color: #00e600;
+        background: #c2f0c2;
+      }
     }
   }
 `;

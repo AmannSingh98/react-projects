@@ -18,7 +18,7 @@ const Card = () => {
       </header>
       <p className="bio">
         {' '}
-        {(about.length > 50 && `${about.slice(0, 80)}...`) ||
+        {(about.length > 50 && `${about.slice(0, 40)}...`) ||
           `Let's code and make this world a beautiful place for coders (Bio....)`}
       </p>
       <div className="links">
