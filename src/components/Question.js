@@ -1,11 +1,28 @@
 import React, { useContext } from 'react';
 import { GithubContext, LeetcodeContext } from '../context/context';
 import styled from 'styled-components';
+import { BiLike, BiDislike } from 'react-icons/bi';
 
 const Question = () => {
   const { leetcodeDailyQuestion } = useContext(LeetcodeContext);
-  const { topicTags, difficulty, questionLink, questionId, questionTitle } =
-    leetcodeDailyQuestion;
+  const {
+    dislikes,
+    likes,
+    topicTags,
+    difficulty,
+    questionLink,
+    questionId,
+    questionTitle,
+    id,
+  } = leetcodeDailyQuestion;
+  const likeConversion = (number) => {
+    if (likes < 1000) return number.toString();
+    else if (number < 1000000) {
+      return Math.floor(number / 1000) + 'k';
+    } else {
+      return Math.floor(number / 1000000) + 'M';
+    }
+  };
   return (
     <Wrapper>
       <div className="question">
@@ -15,16 +32,26 @@ const Question = () => {
           </h3>
         </header>
         <p>
-          <span>easy</span>
+          <Difficulty>{difficulty} Level</Difficulty>
 
-          {topicTags.map((tag) => {
-            return <span>{tag.name}</span>;
+          {topicTags.map((tag, index) => {
+            return <span key={index}>{tag.name}</span>;
           })}
         </p>
+        <MainContent>
+          <a href={questionLink} target="_blank">
+            Solve Problem
+          </a>
+        </MainContent>
 
-        <a href={questionLink} target="_blank">
-          Solve Problem
-        </a>
+        <Icons>
+          <Vote className="green">
+            <BiLike /> {likeConversion(likes)}
+          </Vote>
+          <Vote className="red">
+            <BiDislike /> {likeConversion(dislikes)}
+          </Vote>
+        </Icons>
       </div>
     </Wrapper>
   );
@@ -61,32 +88,28 @@ const Wrapper = styled.article`
 
     header {
       display: flex;
-      /* img {
-        height: 100%;
-        width: 45px;
-        border-radius: 50%;
-        object-fit: cover;
-      } */
     }
     h3 {
-      font-size: 20px;
+      font-size: 16px;
       line-height: 30px;
       font-weight: 600;
       font-family: var(--ff-primary);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.25rem;
     }
     p {
-      margin: 0;
-      margin-bottom: 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      row-gap: 0.25rem;
+      margin: 0.25rem;
     }
     span {
+      display: grid;
+      place-items: center;
       color: var(--clr-primary-5);
       border: 1px solid var(--clr-primary-5);
       border-radius: 1rem;
-      padding: 0.25rem 0.75rem;
-      width: fit-content;
-      font-size: 12px;
-      margin-bottom: 0.5rem;
+      padding: 0.25rem 0.25rem;
+      font-size: 10px;
       margin-right: 0.5rem;
     }
     a {
@@ -94,11 +117,8 @@ const Wrapper = styled.article`
       background: #e6ffe6;
       border-radius: 1rem;
       padding: 0.5rem 1.25rem;
-      width: fit-content;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
-      margin: 0 auto;
-      transform: translatey(50%);
       &:hover {
         color: #00e600;
         background: #c2f0c2;
@@ -106,4 +126,46 @@ const Wrapper = styled.article`
     }
   }
 `;
+
+const MainContent = styled.section`
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+`;
+
+const Difficulty = styled.span`
+  display: grid;
+  place-items: center;
+  color: var(--clr-primary-5);
+  border: 1px solid var(--clr-primary-5);
+  border-radius: 1rem;
+  padding: 0.25rem 0.25rem;
+  font-size: 10px;
+`;
+
+const Icons = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 2fr));
+  .green {
+    background: var(--clr-primary-10);
+    color: var(--clr-primary-5);
+  }
+
+  .red {
+    background: #ffcccc;
+    color: #ff6666;
+  }
+`;
+
+const Vote = styled.div`
+  font-size: 13px;
+  display: grid;
+  grid-template-columns: auto auto;
+  place-items: center;
+  padding: 0.4rem 0.25rem;
+  border-radius: 20%;
+  margin-right: 0.5rem;
+`;
+
 export default Question;
